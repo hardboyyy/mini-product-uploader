@@ -1,5 +1,6 @@
 import React from "react"
 import { ProductData } from "../types"
+import ProductImagePreview from "./ProductImagePreview"
 
 interface ProductFormProps {
   productData: ProductData
@@ -24,10 +25,11 @@ export default function ProductForm({
   const [errors, setErrors] = React.useState<{
     title?: string
     category?: string
+    uploadedImages?: string
   }>({})
 
   const [tagsInput, setTagsInput] = React.useState("")
-
+  const [uploadedImages, setUploadedImages] = React.useState<File[]>([]);
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -65,7 +67,9 @@ export default function ProductForm({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const newErrors: { title?: string; category?: string } = {}
+    const newErrors: {
+        uploadedImages: string; title?: string; category?: string 
+} = {}
 
     if (!productData.title) {
       newErrors.title = "Title is required"
@@ -74,6 +78,10 @@ export default function ProductForm({
     if (!productData.category) {
       newErrors.category = "Category is required"
     }
+
+    if (uploadedImages.length === 0) {
+      newErrors.uploadedImages = "At least one image is required"
+      }
 
     setErrors(newErrors)
 
@@ -187,6 +195,8 @@ export default function ProductForm({
               )}
             </div>
           </div>
+          
+          <ProductImagePreview uploadedImages={uploadedImages} setUploadedImages={setUploadedImages} errors={errors} />
 
           <div className="mt-6">
             <button
