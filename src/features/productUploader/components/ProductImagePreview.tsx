@@ -1,3 +1,4 @@
+import ImagePreview from 'components/image/ImagePreview';
 import React from 'react'
 
 interface ProductImagePreviewProps {
@@ -18,7 +19,11 @@ export default function ProductImagePreview({ uploadedImages, setUploadedImages,
       const newImages = Array.from(files).slice(0, 3)
       setUploadedImages((prevImages) => [...prevImages, ...newImages])
     }
-  }
+  };
+
+  const handleRemoveImage = (index: number) => {
+    setUploadedImages((prevImages) => prevImages.filter((_, i) => i !== index))
+    };
 
   console.log("Uploaded images:", uploadedImages);
 
@@ -61,6 +66,23 @@ export default function ProductImagePreview({ uploadedImages, setUploadedImages,
       {errors?.uploadedImages && (
         <div className="mb-4 flex items-start rounded-md border border-red-200 bg-red-50 px-4 py-3 text-red-700">
           <p className="text-sm">{errors.uploadedImages}</p>
+        </div>
+      )}
+
+    {uploadedImages.length > 0 ? (
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {uploadedImages.map((image, index) => (
+            <ImagePreview 
+              key={`${image.name}-${index}`} 
+              image={image} 
+              onRemove={() => handleRemoveImage(index)} 
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="flex flex-col items-center justify-center rounded-md bg-gray-50 py-8">
+          {/* <ImageIcon className="mb-3 size-12 text-gray-300" /> */}
+          <p className="text-sm text-gray-500">No images uploaded yet</p>
         </div>
       )}
     </div>
