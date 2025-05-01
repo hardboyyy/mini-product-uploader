@@ -14,7 +14,8 @@ const MAX_IMAGES: number = 3;
 export default function ProductImagePreview({ uploadedImages, setUploadedImages, errors }: ProductImagePreviewProps) {
 
   const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files
+    const files = e.target.files;
+    console.log("Files:", files);
     if (files) {
       const newImages = Array.from(files).slice(0, 3)
       setUploadedImages((prevImages) => [...prevImages, ...newImages])

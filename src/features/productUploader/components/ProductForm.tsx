@@ -5,6 +5,12 @@ interface ProductFormProps {
   productData: ProductData
   setProductData: React.Dispatch<React.SetStateAction<ProductData>>
   hasImages: boolean
+  errors: {
+    title?: string
+    category?: string
+  }
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void
+  isSubmitting: boolean
 }
 
 const CATEGORIES = [
@@ -21,13 +27,11 @@ const CATEGORIES = [
 export default function ProductForm({
   productData,
   setProductData,
-  hasImages
+  hasImages,
+  errors,
+  handleSubmit,
+  isSubmitting
 }: ProductFormProps) {
-  const [errors, setErrors] = React.useState<{
-    title?: string
-    category?: string
-  }>({})
-
   const [tagsInput, setTagsInput] = React.useState("")
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -62,32 +66,6 @@ export default function ProductForm({
       ...prevData,
       tags: prevData.tags.filter((tag) => tag !== tagToRemove)
     }))
-  }
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const newErrors: {
-        uploadedImages: string; title?: string; category?: string 
-} = {}
-
-    if (!productData.title) {
-      newErrors.title = "Title is required"
-    }
-
-    if (!productData.category) {
-      newErrors.category = "Category is required"
-    }
-
-    if (uploadedImages.length === 0) {
-      newErrors.uploadedImages = "At least one image is required"
-      }
-
-    setErrors(newErrors)
-
-    if (Object.keys(newErrors).length === 0) {
-      // Submit the form
-      console.log("Form submitted:", productData)
-    }
   }
 
   console.log("productData", productData)
@@ -199,14 +177,13 @@ export default function ProductForm({
               Please upload at least one image
             </p>
           )}
-          
 
           <div className="mt-6">
             <button
               type="submit"
               className="inline-flex items-center justify-center rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
             >
-              Submit
+              {isSubmitting ? 'loading...' : 'Submit'}
             </button>
           </div>
         </form>
