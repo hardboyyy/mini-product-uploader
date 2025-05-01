@@ -65,7 +65,7 @@ export default function ProductUploader() {
     <div className="container mx-auto px-4 py-8">
     <h1 className="mb-6 text-3xl font-bold text-gray-800">Product Uploader</h1>
     <div className='lg:flex lg:gap-8'>
-        <div className="w-full lg:w-1/2">
+        <div className="mb-8 w-full lg:mb-0 lg:w-1/2">
             <ProductForm productData={productData} setProductData={setProductData} isSubmitting={isSubmitting} hasImages={uploadedImages.length > 0} handleSubmit={handleSubmit} errors={errors} />
         </div>
         <div className="w-full lg:w-1/2">
