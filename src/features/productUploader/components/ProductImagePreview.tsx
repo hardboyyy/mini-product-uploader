@@ -83,7 +83,7 @@ export default function ProductImagePreview({ uploadedImages, setUploadedImages,
               accept="image/jpeg,image/png,image/gif,image/webp"
               onChange={(e) => {
                 handleFileInputChange(e);
-                e.target.value = ''; // Reset the input value to allow re-selection of the same file AI assisted
+                e.target.value = ''; // bugfix: when you upload the same file, it doesn't trigger the onChange event
               }}
               className="sr-only"
               disabled={uploadedImages.length >= MAX_IMAGES}
