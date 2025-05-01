@@ -1,10 +1,10 @@
 import React from "react"
 import { ProductData } from "../types"
-import ProductImagePreview from "./ProductImagePreview"
 
 interface ProductFormProps {
   productData: ProductData
   setProductData: React.Dispatch<React.SetStateAction<ProductData>>
+  hasImages: boolean
 }
 
 const CATEGORIES = [
@@ -20,16 +20,15 @@ const CATEGORIES = [
 
 export default function ProductForm({
   productData,
-  setProductData
+  setProductData,
+  hasImages
 }: ProductFormProps) {
   const [errors, setErrors] = React.useState<{
     title?: string
     category?: string
-    uploadedImages?: string
   }>({})
 
   const [tagsInput, setTagsInput] = React.useState("")
-  const [uploadedImages, setUploadedImages] = React.useState<File[]>([]);
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -195,8 +194,12 @@ export default function ProductForm({
               )}
             </div>
           </div>
+          {!hasImages && (
+            <p className="mt-2 text-center text-sm text-orange-500">
+              Please upload at least one image
+            </p>
+          )}
           
-          <ProductImagePreview uploadedImages={uploadedImages} setUploadedImages={setUploadedImages} errors={errors} />
 
           <div className="mt-6">
             <button

@@ -21,6 +21,32 @@ export default function ProductImagePreview({ uploadedImages, setUploadedImages,
     }
   };
 
+    const handleDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault()
+        e.stopPropagation()
+    };
+
+    const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault()
+        e.stopPropagation()
+    };
+
+    const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault()
+        e.stopPropagation()
+    };
+
+    const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault()
+        e.stopPropagation()
+        const files = e.dataTransfer.files
+        if (files) {
+            const newImages = Array.from(files).slice(0, 3)
+            setUploadedImages((prevImages) => [...prevImages, ...newImages])
+        }
+    };
+
+
   const handleRemoveImage = (index: number) => {
     setUploadedImages((prevImages) => prevImages.filter((_, i) => i !== index))
     };
@@ -34,6 +60,10 @@ export default function ProductImagePreview({ uploadedImages, setUploadedImages,
       
       <div
         className={`mb-4 rounded-lg border-2 border-dashed p-6 text-center transition-colors duration-200`}
+        onDragEnter={handleDragEnter}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
       >
         <div className="flex flex-col items-center justify-center">
           

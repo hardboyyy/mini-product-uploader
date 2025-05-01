@@ -18,7 +18,7 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({ image, onRemove }) => {
     return () => {
       URL.revokeObjectURL(objectUrl);
     };
-  }, [image]);
+  }, [image]); //AI assisted, cleanup function added to revoke the object URL
 
   return (
     <div 
