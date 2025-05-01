@@ -1,6 +1,7 @@
 import React from "react"
 import { ProductData } from "../types"
 import Loader from "components/ui/Loader"
+import Button from "components/ui/Button"
 
 interface ProductFormProps {
   productData: ProductData
@@ -160,13 +161,13 @@ export default function ProductForm({
                       className="inline-flex items-center rounded-full bg-blue-100 px-2 py-1 text-sm font-medium text-blue-800"
                     >
                       {tag}
-                      <button
+                      <Button
                         type="button"
                         onClick={() => removeTag(tag)}
                         className="ml-1 text-blue-600 hover:text-blue-800 focus:outline-none"
                       >
                         &times;
-                      </button>
+                      </Button>
                     </span>
                   ))}
                 </div>
@@ -180,12 +181,13 @@ export default function ProductForm({
           )}
 
           <div className="mt-6">
-            <button
+            <Button
               type="submit"
-              className="inline-flex items-center justify-center rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
+              disabled={isSubmitting || !hasImages}
+            //   className="inline-flex items-center justify-center rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
             >
-              {isSubmitting ? <Loader />: 'Submit'}
-            </button>
+              {isSubmitting ? <Loader /> : "Submit"}
+            </Button>
           </div>
         </form>
       </div>

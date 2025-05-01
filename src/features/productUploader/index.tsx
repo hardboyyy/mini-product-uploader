@@ -16,6 +16,7 @@ export default function ProductUploader() {
   const [errors, setErrors] = React.useState<{
     title?: string
     category?: string
+    uploadedImages?: string
   }>({})
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
