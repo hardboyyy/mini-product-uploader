@@ -23,9 +23,9 @@ export default function ProductUploader() {
     setIsSubmitting(true)
     e.preventDefault()
     const newErrors: {
-      uploadedImages: string
       title?: string
       category?: string
+      uploadedImages?: string
     } = {}
 
     if (!productData.title) {

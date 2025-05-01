@@ -79,7 +79,7 @@ const Toast: React.FC<ToastProps> = ({
   
   return (
     <div 
-      className={`fixed bottom-4 right-4 flex items-start rounded-lg border p-4 shadow-lg ${getBgColor()} transition-opacity duration-300 ${
+      className={`fixed right-4 top-4 flex items-start rounded-lg border p-4 shadow-lg ${getBgColor()} transition-opacity duration-300 ${
         isVisible ? 'opacity-100' : 'opacity-0'
       }`}
       style={{ maxWidth: '90vw', zIndex: 50 }}

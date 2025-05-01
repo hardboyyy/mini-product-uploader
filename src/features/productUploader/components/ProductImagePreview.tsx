@@ -1,5 +1,5 @@
 import ImagePreview from 'components/image/ImagePreview';
-import React from 'react'
+import React, { useCallback } from 'react'
 
 interface ProductImagePreviewProps {
   uploadedImages: File[];
@@ -22,22 +22,22 @@ export default function ProductImagePreview({ uploadedImages, setUploadedImages,
     }
   };
 
-    const handleDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
+    const handleDragEnter = useCallback((e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault()
         e.stopPropagation()
-    };
+    }, []);
 
-    const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    const handleDragOver = useCallback((e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault()
         e.stopPropagation()
-    };
+    },[]);
 
-    const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+    const handleDragLeave = useCallback((e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault()
         e.stopPropagation()
-    };
+    },[]);
 
-    const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    const handleDrop = useCallback((e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault()
         e.stopPropagation()
         const files = e.dataTransfer.files
@@ -45,7 +45,7 @@ export default function ProductImagePreview({ uploadedImages, setUploadedImages,
             const newImages = Array.from(files).slice(0, 3)
             setUploadedImages((prevImages) => [...prevImages, ...newImages])
         }
-    };
+    },[setUploadedImages]);
 
 
   const handleRemoveImage = (index: number) => {
