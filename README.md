@@ -19,8 +19,7 @@ Check out the live deployment here:
 2. Navigate to the project directory:
     ```bash
     cd mini-product-uploader
-    2.5. View the live demo:
-        [Mini Product Uploader Demo](https://mini-product-uploader.vercel.app/)
+    ```
 3. Install dependencies:
     ```bash
     npm install
