@@ -26,7 +26,7 @@ Check out the live deployment here:
     ```
 4. Start the application:
     ```bash
-    npm start
+    npm run dev
     ```
 
 ## Time Spent
